@@ -5,7 +5,7 @@
 .footer ul a { color: var(--texto-suave); text-decoration: none; }
 .footer ul a:hover { color: var(--cafe-oscuro); text-decoration: underline; }
 .footer__brand p { color: var(--texto-suave); font-size: .9rem; margin: 10px 0 14px; }
-.footer__brand .logo-img { height: 80px; width: 80px; }
+.footer__brand .logo-img { height: 54px; width: auto; }
 .footer__social { display: flex; gap: 10px; }
 .footer__social a { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--linea); color: var(--texto); }
 .footer__social a:hover { border-color: var(--cafe); color: var(--cafe-oscuro); background: var(--beige); }

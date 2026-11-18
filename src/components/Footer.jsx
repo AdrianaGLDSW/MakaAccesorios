@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer__grid container">
         <div className="footer__brand">
-          <Logo alto={72} />
+          <Logo />
           <p>{TIENDA.lema}.</p>
           <div className="footer__social" aria-label="Redes sociales">
             {REDES.map(r => (

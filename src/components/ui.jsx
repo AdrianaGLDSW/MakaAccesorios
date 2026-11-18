@@ -3,8 +3,8 @@ import { useId } from 'react';
 import Icon from './Icon';
 import { TIENDA } from '../data/config';
 
-export function Logo({ claro = false, alto = 52 }) {
-  if (TIENDA.logo) return <img className="logo-img" src={TIENDA.logo} alt="MAKA Accesorios" height={alto} width={alto} />;
+export function Logo({ claro = false }) {
+  if (TIENDA.logo) return <img className="logo-img" src={TIENDA.logo} alt="MAKA Accesorios" width="193" height="71" />;
   return <span className={`logo-text ${claro ? 'is-light' : ''}`}>MAKA</span>;
 }
 
@@ -21,6 +21,7 @@ export function Breadcrumbs({ items }) {
   );
 }
 
+// Campo de formulario con etiqueta visible y mensaje de error asociado (RNF-04).
 export function Field({ label, error, hint, children, id: idProp, opcional }) {
   const auto = useId();
   const id = idProp || auto;

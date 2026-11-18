@@ -1,12 +1,12 @@
 .site-header { position: sticky; top: 0; z-index: 40; background: #fff; box-shadow: 0 1px 0 var(--linea); }
 .promo { background: var(--beige); color: #6b4a30; text-align: center; font-size: .83rem; font-weight: 500; padding: 7px 12px; }
-.navbar { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; gap: 22px; padding: 8px 24px; min-height: 72px; }
+.navbar { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; gap: 20px; padding: 8px 24px; min-height: 72px; }
 .navbar__logo { display: flex; align-items: center; flex: none; text-decoration: none; }
-.logo-img { height: 58px; width: 58px; object-fit: contain; }
+.logo-img { height: 46px; width: auto; }
 .logo-text { font-size: 1.7rem; font-weight: 600; letter-spacing: .32em; color: var(--texto); padding-left: .32em; }
 .logo-text.is-light { color: #fff; }
 .navbar__menu { display: none; background: none; border: 0; padding: 8px; margin-left: -8px; }
-.navbar__nav { display: flex; gap: 18px; align-items: center; font-size: .92rem; font-weight: 500; }
+.navbar__nav { display: flex; gap: 16px; align-items: center; font-size: .92rem; font-weight: 500; }
 .navbar__nav a { color: var(--texto); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
 .navbar__nav a:hover, .navbar__nav a.active { color: var(--cafe-oscuro); border-bottom-color: var(--cafe); }
 .navbar__nav-head, .navbar__nav-extra { display: none; }
@@ -22,15 +22,15 @@
 .navbar__icon-only { display: none; }
 .badge { position: absolute; top: -5px; right: -7px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 99px; background: var(--cafe-oscuro); color: #fff; font-size: .7rem; font-weight: 700; display: grid; place-items: center; }
 
-@media (max-width: 1180px) {
+@media (max-width: 1380px) {
   .navbar__auth { display: none; }
   .navbar__icon-only { display: grid; }
   .navbar__hello { display: none; }
 }
-@media (max-width: 1060px) {
+@media (max-width: 1180px) {
   .navbar { gap: 12px; padding: 6px 16px; min-height: 64px; }
   .navbar__menu { display: grid; }
-  .logo-img { height: 50px; width: 50px; }
+  .logo-img { height: 40px; }
   .navbar__nav { position: fixed; inset: 0 auto 0 0; width: min(84vw, 340px); background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 0 0 24px; z-index: 50; transform: translateX(-100%); transition: transform .25s ease; overflow-y: auto; box-shadow: 4px 0 30px rgba(0,0,0,.15); }
   .navbar__nav.is-open { transform: none; }
   .navbar__nav a { padding: 14px 22px; border-bottom: 1px solid var(--linea); font-size: 1rem; }
