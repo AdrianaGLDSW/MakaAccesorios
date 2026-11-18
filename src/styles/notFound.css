@@ -1,0 +1,7 @@
+.nf { text-align: center; background: #fff; border: 1px solid var(--linea); border-radius: 18px; padding: 50px 20px; }
+.nf__code { font-size: clamp(4rem, 3rem + 6vw, 7rem); font-weight: 700; color: #e6d6ca; letter-spacing: .08em; line-height: 1; margin: 0 0 12px; }
+.nf__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.nf__search { display: flex; gap: 8px; max-width: 460px; margin: 0 auto; align-items: center; position: relative; }
+.nf__search .icon { position: absolute; left: 14px; color: var(--texto-suave); }
+.nf__search input { padding-left: 40px !important; }
+.nf__search .btn { min-height: 46px; }

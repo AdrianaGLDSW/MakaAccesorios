@@ -1,0 +1,54 @@
+.info-hero { text-align: center; max-width: 760px; margin: 10px auto 0; }
+.info-hero .lead { margin: 0 auto; }
+.story { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; }
+.story__img img { border-radius: 18px; aspect-ratio: 4/5; object-fit: cover; width: 100%; max-height: 520px; }
+.mv { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.mv article, .values article { background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); padding: 24px; }
+.mv .icon { color: var(--cafe-oscuro); margin-bottom: 8px; }
+.mv h2 { font-size: 1.3rem; }
+.mv p { margin: 0; color: var(--texto-suave); }
+.values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.values article { border-top: 4px solid var(--rosa); }
+.values p { margin: 0; color: var(--texto-suave); font-size: .92rem; }
+.quality { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; background: var(--beige); border-radius: 18px; padding: 32px; }
+.checklist { list-style: none; padding: 0; margin: 0; }
+.checklist li { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; }
+.checklist .icon { color: var(--exito); flex: none; margin-top: 3px; }
+.location { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: stretch; }
+.points { list-style: none; padding: 0; margin: 0 0 12px; }
+.points li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.points li > div { display: flex; flex-direction: column; }
+.points .icon { color: var(--cafe-oscuro); flex: none; margin-top: 2px; }
+.cta-band { margin-top: 56px; text-align: center; background: var(--cafe-oscuro); color: #fff; border-radius: 18px; padding: 36px 20px; }
+.cta-band h2 { color: #fff; }
+.cta-band .btn--primary { background: #fff; color: var(--cafe-oscuro); }
+.cta-band .btn--primary:hover { background: var(--beige); }
+@media (max-width: 900px) {
+  .story, .mv, .quality, .location { grid-template-columns: 1fr; }
+  .values { grid-template-columns: 1fr 1fr; }
+  .quality { padding: 22px; }
+}
+@media (max-width: 520px) { .values { grid-template-columns: 1fr; } }
+
+.contact { display: grid; grid-template-columns: 340px 1fr; gap: 28px; align-items: start; margin-top: 18px; }
+.contact__channels { display: flex; flex-direction: column; gap: 12px; }
+.channel { display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); padding: 16px; text-decoration: none; color: var(--texto); }
+.channel > div { display: flex; flex-direction: column; font-size: .9rem; }
+.channel span { color: var(--texto-suave); }
+.channel .icon { color: var(--cafe-oscuro); flex: none; }
+.channel--wa { background: #eaf5ee; border-color: #a9d3b7; }
+.channel--wa .icon, .channel--wa strong { color: var(--wa); }
+.channel__social { display: flex; gap: 12px; flex-wrap: wrap; }
+.channel__social a { font-weight: 600; }
+.faq__more { margin-top: 18px; }
+@media (max-width: 900px) { .contact { grid-template-columns: 1fr; } }
+
+.legal { display: grid; grid-template-columns: 240px 1fr; gap: 34px; align-items: start; }
+.legal__nav { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); overflow: hidden; position: sticky; top: 120px; }
+.legal__nav a { padding: 12px 16px; text-decoration: none; color: var(--texto); border-bottom: 1px solid var(--linea); font-size: .92rem; }
+.legal__nav a.active { background: var(--beige); font-weight: 700; color: var(--cafe-hover); }
+.legal__doc { background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); padding: 30px; max-width: 820px; }
+.legal__doc h2 { font-size: 1.1rem; margin-top: 22px; scroll-margin-top: 130px; }
+.legal__toc { background: var(--beige-claro); border-radius: var(--radio-sm); padding: 12px 16px; font-size: .9rem; }
+.legal__toc ol { margin: 0; padding-left: 18px; columns: 2; }
+@media (max-width: 820px) { .legal { grid-template-columns: 1fr; } .legal__nav { position: static; flex-direction: row; overflow-x: auto; } .legal__nav a { white-space: nowrap; border-bottom: 0; border-right: 1px solid var(--linea); } .legal__toc ol { columns: 1; } .legal__doc { padding: 20px; } }

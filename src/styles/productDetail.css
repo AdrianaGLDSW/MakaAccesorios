@@ -1,0 +1,54 @@
+.pd { display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; align-items: start; }
+.pd__gallery { position: sticky; top: 120px; }
+.pd__main { position: relative; display: block; width: 100%; padding: 0; border: 1px solid var(--linea); border-radius: var(--radio); overflow: hidden; background: var(--beige); cursor: zoom-in; aspect-ratio: 4 / 5; }
+.pd__main:disabled { cursor: default; }
+.pd__main img, .pd__main .img-placeholder { width: 100%; height: 100%; object-fit: cover; }
+.pd__main.is-soldout img, .pd__main.is-soldout .img-placeholder { opacity: .55; filter: grayscale(.4); }
+.pd__soldout { position: absolute; left: 14px; top: 14px; font-size: .82rem; padding: 6px 12px; }
+.pd__thumbs { display: flex; gap: 10px; margin-top: 10px; }
+.pd__thumbs button { width: 76px; aspect-ratio: 4/5; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden; background: none; }
+.pd__thumbs button.is-active { border-color: var(--cafe-oscuro); }
+.pd__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.pd__info h1 { margin: 10px 0 6px; }
+.pd__rating { display: inline-flex; align-items: center; gap: 8px; font-size: .88rem; color: var(--texto-suave); text-decoration: none; }
+.pd__price { font-size: 1.8rem; font-weight: 700; margin: 12px 0 6px; }
+.pd__price small { font-size: .9rem; color: var(--texto-suave); font-weight: 500; }
+.pd__stock { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: .92rem; color: var(--exito); }
+.pd__stock.is-low { color: #8a5a00; }
+.pd__stock.is-out { color: var(--texto); }
+.pd__opt { margin: 18px 0 0; }
+.pd__opt legend { font-size: .92rem; margin-bottom: 8px; }
+.pd__buy { display: flex; gap: 10px; margin: 22px 0 8px; align-items: stretch; flex-wrap: wrap; }
+.pd__add { flex: 1; min-width: 200px; min-height: 52px; }
+.pd__buy .btn--icon { width: 52px; min-height: 52px; }
+.pd__buy .qty { height: 52px; }
+.notify { margin: 18px 0; padding: 18px; border-radius: var(--radio); background: var(--beige); border: 1px solid #ecd6c6; }
+.notify strong { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.notify__form { display: flex; gap: 10px; align-items: flex-start; }
+.notify__form .field { flex: 1; margin: 0; }
+.notify__form .field label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.notify__form .btn { min-height: 46px; }
+.pd__perks { display: flex; flex-wrap: wrap; gap: 14px 22px; margin: 22px 0 10px; font-size: .86rem; color: var(--texto-suave); }
+.pd__perks span { display: flex; align-items: center; gap: 6px; }
+.pd__perks .icon { color: var(--cafe-oscuro); }
+.pd__ask { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 600; font-size: .9rem; color: var(--wa); }
+.lightbox { position: fixed; inset: 0; z-index: 70; background: rgba(20, 16, 14, .9); display: grid; place-items: center; padding: 24px; cursor: zoom-out; }
+.lightbox img { max-height: 90vh; width: auto; border-radius: 8px; }
+.lightbox__close { position: absolute; top: 16px; right: 16px; background: none; border: 0; color: #fff; }
+
+.reviews__grid { display: grid; grid-template-columns: 340px 1fr; gap: 36px; align-items: start; }
+.reviews__summary { background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); padding: 22px; }
+.reviews__avg { font-size: 3rem; font-weight: 700; line-height: 1; margin: 0 0 4px; }
+.reviews__dist { list-style: none; padding: 0; margin: 12px 0 22px; font-size: .82rem; }
+.reviews__dist li { display: grid; grid-template-columns: 34px 1fr 20px; gap: 8px; align-items: center; margin: 4px 0; }
+.reviews__form { border-top: 1px solid var(--linea); padding-top: 18px; }
+.reviews__list { list-style: none; padding: 0; margin: 0; }
+.review { padding: 16px 0; border-bottom: 1px solid var(--linea); }
+.review__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.review p { margin: 0 0 4px; }
+@media (max-width: 900px) {
+  .pd { grid-template-columns: 1fr; gap: 24px; }
+  .pd__gallery { position: static; }
+  .reviews__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) { .pd__add { order: 3; flex-basis: 100%; } .pd__buy .qty { flex: 1; justify-content: space-between; } }

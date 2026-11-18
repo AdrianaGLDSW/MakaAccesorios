@@ -1,0 +1,51 @@
+.site-header { position: sticky; top: 0; z-index: 40; background: #fff; box-shadow: 0 1px 0 var(--linea); }
+.promo { background: var(--beige); color: #6b4a30; text-align: center; font-size: .83rem; font-weight: 500; padding: 7px 12px; }
+.navbar { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; gap: 22px; padding: 8px 24px; min-height: 72px; }
+.navbar__logo { display: flex; align-items: center; flex: none; text-decoration: none; }
+.logo-img { height: 58px; width: 58px; object-fit: contain; }
+.logo-text { font-size: 1.7rem; font-weight: 600; letter-spacing: .32em; color: var(--texto); padding-left: .32em; }
+.logo-text.is-light { color: #fff; }
+.navbar__menu { display: none; background: none; border: 0; padding: 8px; margin-left: -8px; }
+.navbar__nav { display: flex; gap: 18px; align-items: center; font-size: .92rem; font-weight: 500; }
+.navbar__nav a { color: var(--texto); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+.navbar__nav a:hover, .navbar__nav a.active { color: var(--cafe-oscuro); border-bottom-color: var(--cafe); }
+.navbar__nav-head, .navbar__nav-extra { display: none; }
+.navbar__search { flex: 1; max-width: 260px; min-width: 150px; position: relative; display: flex; align-items: center; margin-left: auto; }
+.navbar__search .icon { position: absolute; left: 14px; color: var(--texto-suave); pointer-events: none; }
+.navbar__search input { min-height: 40px !important; border-radius: 999px !important; padding-left: 40px !important; background: var(--beige-claro) !important; border-color: var(--linea) !important; font-size: .9rem; }
+.navbar__actions { display: flex; align-items: center; gap: 16px; flex: none; }
+.navbar__actions a { color: var(--texto); text-decoration: none; }
+.navbar__auth { font-size: .86rem; color: var(--texto-suave); white-space: nowrap; }
+.navbar__auth a { font-weight: 600; }
+.navbar__account { display: flex; align-items: center; gap: 8px; font-size: .88rem; font-weight: 600; }
+.navbar__icon, .navbar__icon-only { position: relative; display: grid; place-items: center; padding: 4px; }
+.navbar__icon-only { display: none; }
+.badge { position: absolute; top: -5px; right: -7px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 99px; background: var(--cafe-oscuro); color: #fff; font-size: .7rem; font-weight: 700; display: grid; place-items: center; }
+
+@media (max-width: 1180px) {
+  .navbar__auth { display: none; }
+  .navbar__icon-only { display: grid; }
+  .navbar__hello { display: none; }
+}
+@media (max-width: 1060px) {
+  .navbar { gap: 12px; padding: 6px 16px; min-height: 64px; }
+  .navbar__menu { display: grid; }
+  .logo-img { height: 50px; width: 50px; }
+  .navbar__nav { position: fixed; inset: 0 auto 0 0; width: min(84vw, 340px); background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 0 0 24px; z-index: 50; transform: translateX(-100%); transition: transform .25s ease; overflow-y: auto; box-shadow: 4px 0 30px rgba(0,0,0,.15); }
+  .navbar__nav.is-open { transform: none; }
+  .navbar__nav a { padding: 14px 22px; border-bottom: 1px solid var(--linea); font-size: 1rem; }
+  .navbar__nav a:hover, .navbar__nav a.active { border-bottom-color: var(--linea); background: var(--beige-claro); }
+  .navbar__nav-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 14px 22px; font-weight: 700; background: var(--beige); }
+  .navbar__nav-head button { background: none; border: 0; padding: 6px; }
+  .navbar__nav-extra { display: flex; flex-direction: column; margin-top: 12px; }
+  .navbar__nav-extra a { font-weight: 600; color: var(--cafe-oscuro); }
+  .navbar__overlay { position: fixed; inset: 0; background: rgba(30, 25, 20, .4); z-index: 45; }
+  .navbar__search { max-width: none; }
+}
+@media (max-width: 640px) {
+  .navbar { flex-wrap: wrap; }
+  .navbar__logo { margin-right: auto; }
+  .navbar__search { order: 5; flex-basis: 100%; margin: 0 0 8px; }
+  .navbar__actions { gap: 12px; }
+  .promo { font-size: .76rem; }
+}

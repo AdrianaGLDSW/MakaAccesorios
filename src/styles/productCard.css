@@ -1,0 +1,19 @@
+.card { background: #fff; border-radius: var(--radio); overflow: hidden; border: 1px solid var(--linea); display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s; }
+.card:hover { box-shadow: var(--sombra); transform: translateY(-2px); }
+.card__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--beige); }
+.card__media > a { display: block; height: 100%; text-decoration: none; }
+.card__img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.card:hover .card__img { transform: scale(1.04); }
+.card.is-soldout .card__img, .card.is-soldout .img-placeholder { opacity: .5; filter: grayscale(.4); }
+.card__tags { position: absolute; left: 10px; top: 10px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.card__fav { position: absolute; right: 10px; top: 10px; width: 38px; height: 38px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: var(--texto); display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.card__fav:hover, .card__fav.is-on { color: #b3324f; }
+.card__body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.card__name { font-size: .96rem; font-weight: 600; margin: 0; }
+.card__name a { color: var(--texto); text-decoration: none; }
+.card__name a:hover { color: var(--cafe-oscuro); text-decoration: underline; }
+.card__noreviews { font-size: .78rem; color: var(--texto-suave); }
+.card__price { font-weight: 700; font-size: 1.02rem; margin: 2px 0 10px; }
+.card__body .btn { margin-top: auto; }
+@media (max-width: 560px) { .card__body { padding: 10px; } .card__body .btn { font-size: .8rem; padding: 0 8px; } .card__name { font-size: .88rem; } }
+@media (max-width: 560px) { .card__body .btn .icon { display: none; } }
