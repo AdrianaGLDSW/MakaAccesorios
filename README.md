@@ -1,6 +1,6 @@
 # MAKA Accesorios · Prototipo web
 
-Prototipo no funcional del sitio de comercio electrónico de MAKA Accesorios, desarrollado con **React + Vite** para el Proyecto III (UDG Virtual).
+Prototipo **no funcional** del sitio de comercio electrónico de MAKA Accesorios, desarrollado con **React + Vite** para el Proyecto III (UDG Virtual).
 
 El sitio se navega como una tienda real, pero no tiene servidor: el catálogo vive en archivos de datos y las cuentas, el carrito, los pedidos y las opiniones se guardan en el navegador (`localStorage`). No se cobra ni se envían correos.
 
@@ -68,7 +68,7 @@ Las rutas del repositorio anterior (`/productos`, `/product/:id`, `/cart`) redir
 ## Datos de prueba
 
 - **Cupones:** `MAKA10` (10 %), `BIENVENIDA` ($100 en compras desde $1,000) y `VERANO25` (vencido, para mostrar el mensaje de error).
-- **Producto agotado:** *Anillo Sol plata* muestra el estado «Agotado» y el formulario «Avísame cuando vuelva».
+- **Producto agotado:** *Anillo Disco Martillado* muestra el estado «Agotado» y el formulario «Avísame cuando vuelva».
 - **Búsqueda sin resultados:** busca, por ejemplo, «brazalete titanio».
 - **Apartado de 24 horas:** al pagar por transferencia, la confirmación muestra un contador. Cuando vence, el pedido aparece como «Cancelado» en *Mi cuenta* y las piezas se liberan.
 - **Recuperar contraseña:** como no se envían correos, la pantalla muestra un «enlace de prueba».
@@ -106,5 +106,5 @@ src/
 
 ## Publicar
 
-- **Netlify:** ejecutar `npm run build` y arrastra la carpeta `dist` a app.netlify.com/drop. El archivo `public/_redirects` ya está incluido.
+- **Netlify:** ejecuta `npm run build` y arrastra la carpeta `dist` a app.netlify.com/drop. El archivo `public/_redirects` ya está incluido.
 - **Vercel:** importa el repositorio; `vercel.json` ya incluye la regla para las rutas.

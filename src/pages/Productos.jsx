@@ -17,6 +17,7 @@ const RANGOS = [
 ];
 const SUGERENCIAS = ['arracadas', 'perla', 'collar', 'pulsera', 'anillo ajustable'];
 
+// 2.1 Productos por categoría y 2.2 Resultados de búsqueda (misma plantilla).
 export default function Productos({ busqueda = false }) {
   const { categoria } = useParams();
   const [params, setParams] = useSearchParams();
@@ -59,7 +60,7 @@ export default function Productos({ busqueda = false }) {
       vendidos: (a, b) => Number(b.masVendido) - Number(a.masVendido),
       valorados: (a, b) => resumen(b.id).promedio - resumen(a.id).promedio,
     }[orden];
-
+    // Relevancia: primero piezas con foto y más vendidas. Los agotados siempre al final.
     const rel = (a, b) => (b.imagenes.length > 0) - (a.imagenes.length > 0) || Number(b.masVendido) - Number(a.masVendido);
     return [...l].sort((a, b) => (existencias(a.id) === 0) - (existencias(b.id) === 0) || (ord ? ord(a, b) : rel(a, b)));
   }, [base, precio, acabado, soloDisponibles, orden, existencias, resumen]);
@@ -110,7 +111,7 @@ export default function Productos({ busqueda = false }) {
               <label key={r.id} className="check"><input type="radio" name="precio" checked={precio === r.id} onChange={() => setParam('precio', r.id)} /> {r.label}</label>
             ))}
           </fieldset>
-          {acabadosDisponibles.length > 1 && (
+          {(cat || busqueda) && acabadosDisponibles.length > 1 && (
             <fieldset>
               <legend>Acabado</legend>
               <label className="check"><input type="radio" name="acabado" checked={!acabado} onChange={() => setParam('acabado', '')} /> Todos</label>
