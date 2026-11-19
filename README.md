@@ -60,8 +60,10 @@ Las rutas del repositorio anterior (`/productos`, `/product/:id`, `/cart`) redir
 | Productos, precios, existencias y fotos | `src/data/productos.js` |
 | Historia, misión, visión, valores, política de calidad, preguntas frecuentes, chat y textos legales | `src/data/contenido.js` |
 
-- **Fotos de productos:** copia la foto a `public/img/productos/` y escribe su nombre en el arreglo `imagenes` del producto. La primera foto es la principal. Mientras un producto no tenga foto se muestra un espacio con la leyenda «Foto pendiente».
-- **Carrusel:** reemplaza `public/img/carrusel/slide-1.jpg`, `slide-2.jpg` y `slide-3.jpg`. Los textos están en `src/pages/Home.jsx`.
+- **Fotos de productos:** copia la foto (JPG, 900 px) a `public/img/productos/` y escribe su nombre en el arreglo `imagenes` del producto. La primera foto es la principal. Para que el catálogo cargue rápido, agrega también una miniatura WebP con el mismo nombre en `public/img/productos/mini/` (por ejemplo `collar-perla-1.webp`, 560 × 700 px). Si falta la miniatura, el sitio usa la foto completa. Mientras un producto no tenga foto se muestra un espacio con la leyenda «Foto pendiente».
+- **Colecciones:** el arreglo `COLECCIONES` de `src/data/productos.js` agrupa piezas (por `id`) para la sección «Completa el set», las tarjetas de colecciones del inicio y el filtro `/catalogo?coleccion=...`.
+- **Carrusel:** las imágenes están en `public/img/carrusel/` (formato WebP). Los textos y enlaces de cada diapositiva están en `SLIDES`, dentro de `src/pages/Home.jsx`.
+- **Ícono y vista previa al compartir:** `public/favicon-64.png`, `public/apple-touch-icon.png` y `public/img/og-maka.jpg` (1200 × 630, la imagen que aparece al compartir el enlace por WhatsApp o redes). Las etiquetas están en `index.html`.
 - **Video:** sube el video a YouTube y pega su identificador en `VIDEO_YOUTUBE_ID`. Por ejemplo, en `https://www.youtube.com/watch?v=AbC123xyz` el identificador es `AbC123xyz`.
 - **Existencias:** el campo `stock` de cada producto. Un producto base con `stock: 0` se muestra como «Agotado»; uno de temporada (`temporada: true`) con `stock: 0` se oculta del catálogo.
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { PRODUCTOS_VISIBLES, categoriaPorSlug, productoPorSlug } from '../data/productos';
+import { PRODUCTOS_VISIBLES, categoriaPorSlug, coleccionDe, productoPorSlug } from '../data/productos';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { usePedidos } from '../context/PedidosContext';
@@ -41,8 +41,14 @@ function Detalle({ p }) {
   const [errTalla, setErrTalla] = useState('');
   const fav = favoritos.includes(p.id);
   const { promedio, total } = resumen(p.id);
-  const relacionados = PRODUCTOS_VISIBLES.filter(x => x.id !== p.id && (x.categoria === p.categoria || x.acabados.some(a => p.acabados.includes(a)))).slice(0, 4);
+  const col = coleccionDe(p.id);
+  const set = col ? PRODUCTOS_VISIBLES.filter(x => x.id !== p.id && col.ids.includes(x.id)).slice(0, 4) : [];
+  const relacionados = PRODUCTOS_VISIBLES.filter(x => x.id !== p.id && !set.includes(x) && (x.categoria === p.categoria || x.acabados.some(a => p.acabados.includes(a)))).slice(0, 4);
   const fotos = p.imagenes.length ? p.imagenes : [null];
+  const mover = (d) => setFoto(f => (f + d + fotos.length) % fotos.length);
+  const [toqueX, setToqueX] = useState(null);
+  const onTouchStart = (e) => setToqueX(e.touches[0].clientX);
+  const onTouchEnd = (e) => { if (toqueX == null) return; const dx = e.changedTouches[0].clientX - toqueX; if (Math.abs(dx) > 40) mover(dx < 0 ? 1 : -1); setToqueX(null); };
 
   const onAgregar = () => {
     if (p.tallas && !talla) { setErrTalla('Elige una talla.'); return; }
@@ -54,13 +60,22 @@ function Detalle({ p }) {
       <Breadcrumbs items={[{ label: cat.nombre, to: `/catalogo/${cat.slug}` }, { label: p.nombre }]} />
       <div className="pd">
         <div className="pd__gallery">
-          <button className={`pd__main ${agotado ? 'is-soldout' : ''}`} onClick={() => p.imagenes.length && setZoom(true)} aria-label={p.imagenes.length ? 'Ampliar foto' : undefined} disabled={!p.imagenes.length}>
-            <ProductImage producto={p} indice={foto} loading="eager" />
+          <div className={`pd__main ${agotado ? 'is-soldout' : ''}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+            <button className="pd__zoom" onClick={() => p.imagenes.length && setZoom(true)} aria-label={p.imagenes.length ? `Ampliar foto ${foto + 1} de ${fotos.length}` : undefined} disabled={!p.imagenes.length}>
+              <ProductImage producto={p} indice={foto} loading="eager" tamano="grande" />
+            </button>
             {agotado && <span className="tag tag--dark pd__soldout">Agotado</span>}
-          </button>
+            {fotos.length > 1 && (
+              <>
+                <button className="pd__arrow pd__arrow--prev" onClick={() => mover(-1)} aria-label="Foto anterior"><Icon name="chevronLeft" size={20} /></button>
+                <button className="pd__arrow pd__arrow--next" onClick={() => mover(1)} aria-label="Foto siguiente"><Icon name="chevronRight" size={20} /></button>
+                <span className="pd__count" aria-hidden="true">{foto + 1} / {fotos.length}</span>
+              </>
+            )}
+          </div>
           {fotos.length > 1 && (
             <div className="pd__thumbs">
-              {fotos.map((_, i) => <button key={i} className={i === foto ? 'is-active' : ''} onClick={() => setFoto(i)} aria-label={`Ver foto ${i + 1}`}><ProductImage producto={p} indice={i} /></button>)}
+              {fotos.map((_, i) => <button key={i} className={i === foto ? 'is-active' : ''} onClick={() => setFoto(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === foto}><ProductImage producto={p} indice={i} /></button>)}
             </div>
           )}
         </div>
@@ -117,11 +132,21 @@ function Detalle({ p }) {
         </div>
       </div>
 
+      {set.length > 0 && (
+        <section className="section set" aria-labelledby="t-set">
+          <div className="section__head">
+            <div><span className="kicker">{col.nombre}</span><h2 id="t-set" className="section__title">Completa el set</h2></div>
+            <Link to={`/catalogo?coleccion=${col.slug}`} className="link-arrow">Ver la colección <Icon name="chevronRight" size={16} /></Link>
+          </div>
+          <div className="grid-products">{set.map(r => <ProductCard key={r.id} producto={r} />)}</div>
+        </section>
+      )}
+
       <Opiniones producto={p} />
 
       {relacionados.length > 0 && (
         <section className="section" aria-labelledby="t-rel">
-          <h2 id="t-rel" className="section__title">Combínala con</h2>
+          <h2 id="t-rel" className="section__title">También te puede gustar</h2>
           <div className="grid-products">{relacionados.map(r => <ProductCard key={r.id} producto={r} />)}</div>
         </section>
       )}
@@ -129,13 +154,14 @@ function Detalle({ p }) {
       {zoom && (
         <div className="lightbox" role="dialog" aria-label={`Foto ampliada de ${p.nombre}`} onClick={() => setZoom(false)}>
           <button className="lightbox__close" aria-label="Cerrar"><Icon name="close" size={28} /></button>
-          <ProductImage producto={p} indice={foto} loading="eager" />
+          <ProductImage producto={p} indice={foto} loading="eager" tamano="grande" />
         </div>
       )}
     </div>
   );
 }
 
+// CU-22: aviso de disponibilidad para productos base agotados.
 function AvisoDisponibilidad({ producto, correoInicial = '' }) {
   const [avisos, setAvisos] = useLocalStorage('maka-avisos', []);
   const [correo, setCorreo] = useState(correoInicial);
@@ -162,6 +188,7 @@ function AvisoDisponibilidad({ producto, correoInicial = '' }) {
   );
 }
 
+// RF-37: valoración de productos.
 function Opiniones({ producto }) {
   const { deProducto, resumen, agregar } = useValoraciones();
   const { usuario } = useAuth();

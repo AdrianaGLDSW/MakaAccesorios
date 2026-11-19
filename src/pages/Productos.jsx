@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { CATEGORIAS, PRODUCTOS_VISIBLES, categoriaPorSlug } from '../data/productos';
+import { CATEGORIAS, COLECCIONES, PRODUCTOS_VISIBLES, categoriaPorSlug, coleccionPorSlug } from '../data/productos';
 import { usePedidos } from '../context/PedidosContext';
 import { useValoraciones } from '../context/ValoracionesContext';
 import { useTitulo } from '../hooks/useLocalStorage';
@@ -32,19 +32,21 @@ export default function Productos({ busqueda = false }) {
   const acabado = params.get('acabado') || '';
   const soloDisponibles = params.get('disponibles') === '1';
   const cat = categoria ? categoriaPorSlug(categoria) : null;
+  const col = coleccionPorSlug(params.get('coleccion') || '');
 
   const setParam = (k, v) => { const n = new URLSearchParams(params); v ? n.set(k, v) : n.delete(k); setParams(n, { replace: true }); setVisibles(POR_PAGINA); };
-  const limpiar = () => { const n = new URLSearchParams(); if (q) n.set('q', q); setParams(n, { replace: true }); };
+  const limpiar = () => { const n = new URLSearchParams(); if (q) n.set('q', q); if (col) n.set('coleccion', col.slug); setParams(n, { replace: true }); };
 
   const base = useMemo(() => {
     let l = PRODUCTOS_VISIBLES;
     if (cat) l = l.filter(p => p.categoria === cat.slug);
+    if (col) l = l.filter(p => col.ids.includes(p.id));
     if (busqueda && q) {
       const palabras = normalizar(q).split(/\s+/).filter(Boolean);
       l = l.filter(p => { const t = normalizar(`${p.nombre} ${categoriaPorSlug(p.categoria).nombre} ${p.descripcion} ${p.material} ${p.acabados.join(' ')}`); return palabras.every(w => t.includes(w)); });
     }
     return l;
-  }, [cat, busqueda, q]);
+  }, [cat, col, busqueda, q]);
 
   const acabadosDisponibles = useMemo(() => [...new Set(base.flatMap(p => p.acabados))], [base]);
 
@@ -65,18 +67,18 @@ export default function Productos({ busqueda = false }) {
     return [...l].sort((a, b) => (existencias(a.id) === 0) - (existencias(b.id) === 0) || (ord ? ord(a, b) : rel(a, b)));
   }, [base, precio, acabado, soloDisponibles, orden, existencias, resumen]);
 
-  const titulo = busqueda ? `Resultados para «${q}»` : cat ? cat.nombre : orden === 'novedades' ? 'Novedades' : 'Catálogo de productos';
+  const titulo = busqueda ? `Resultados para «${q}»` : col ? col.nombre : cat ? cat.nombre : orden === 'novedades' ? 'Novedades' : 'Catálogo de productos';
   useTitulo(busqueda ? `Búsqueda: ${q}` : titulo);
   if (categoria && !cat) return <NotFound />;
   const hayFiltros = precio || acabado || soloDisponibles;
 
   return (
     <div className="container page">
-      <Breadcrumbs items={busqueda ? [{ label: 'Búsqueda' }] : cat ? [{ label: 'Catálogo', to: '/catalogo' }, { label: cat.nombre }] : [{ label: titulo }]} />
+      <Breadcrumbs items={busqueda ? [{ label: 'Búsqueda' }] : col ? [{ label: 'Catálogo', to: '/catalogo' }, { label: col.nombre }] : cat ? [{ label: 'Catálogo', to: '/catalogo' }, { label: cat.nombre }] : [{ label: titulo }]} />
       <div className="catalog-head">
         <div>
           <h1>{titulo}</h1>
-          <p className="muted">{cat?.descripcion || (busqueda ? `${lista.length} coincidencia${lista.length === 1 ? '' : 's'}` : `${lista.length} piezas`)}</p>
+          <p className="muted">{col?.descripcion || cat?.descripcion || (busqueda ? `${lista.length} coincidencia${lista.length === 1 ? '' : 's'}` : `${lista.length} piezas`)}</p>
         </div>
         <div className="catalog-head__tools">
           <button className="btn btn--ghost btn--sm catalog-filters-toggle" onClick={() => setFiltrosAbiertos(o => !o)} aria-expanded={filtrosAbiertos} aria-controls="filtros">
@@ -101,8 +103,14 @@ export default function Productos({ busqueda = false }) {
           <fieldset>
             <legend>Categoría</legend>
             <ul className="filters__cats">
-              <li><Link to={busqueda ? `/catalogo` : '/catalogo'} className={!cat ? 'is-active' : ''}>Todas</Link></li>
+              <li><Link to="/catalogo" className={!cat && !col ? 'is-active' : ''}>Todas</Link></li>
               {CATEGORIAS.map(c => <li key={c.slug}><Link to={`/catalogo/${c.slug}`} className={cat?.slug === c.slug ? 'is-active' : ''}>{c.nombre}</Link></li>)}
+            </ul>
+          </fieldset>
+          <fieldset>
+            <legend>Colecciones</legend>
+            <ul className="filters__cats">
+              {COLECCIONES.map(c => <li key={c.slug}><Link to={`/catalogo?coleccion=${c.slug}`} className={col?.slug === c.slug ? 'is-active' : ''}>{c.nombre.replace('Colección ', '')}</Link></li>)}
             </ul>
           </fieldset>
           <fieldset>

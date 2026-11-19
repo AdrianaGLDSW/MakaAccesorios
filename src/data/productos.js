@@ -17,6 +17,17 @@ export const CATEGORIAS = [
   { slug: 'piezas-unicas', nombre: 'Piezas únicas', descripcion: 'Edición limitada: cuando se van, no regresan.' },
 ];
 
+// Colecciones: piezas que combinan entre sí («Completa el set»).
+export const COLECCIONES = [
+  { slug: 'sagrado-corazon', nombre: 'Colección Sagrado Corazón', descripcion: 'Corazones esmaltados con coronas doradas, inspirados en el arte popular mexicano.', portada: 'aretes-sagrado-corazon-3.jpg', ids: [26, 36, 31, 2, 5] },
+  { slug: 'perlas', nombre: 'Colección Perlas', descripcion: 'Perlas clásicas y barrocas para un look elegante todos los días.', portada: 'collar-perlas-flotantes-1.jpg', ids: [1, 27, 10, 29, 37] },
+  { slug: 'corazones-rojos', nombre: 'Colección Corazones Rojos', descripcion: 'Cristales rojos en forma de corazón engarzados en dorado.', portada: 'collar-corazones-cristal-1.jpg', ids: [28, 41, 42, 43] },
+  { slug: 'mar', nombre: 'Colección Mar', descripcion: 'Caracoles, conchas y estrellas de mar para llevar la playa contigo.', portada: 'anillo-caracol-1.jpg', ids: [33, 39, 56] },
+  { slug: 'fe', nombre: 'Colección Fe', descripcion: 'Rosarios y medallas para regalar en momentos especiales.', portada: 'rosario-collar-virgen-1.jpg', ids: [52, 53, 51, 44] },
+];
+export const coleccionPorSlug = (slug) => COLECCIONES.find(c => c.slug === slug);
+export const coleccionDe = (id) => COLECCIONES.find(c => c.ids.includes(id));
+
 const CUIDADOS = 'Evita el contacto con perfume, cremas, cloro y agua. Guárdala en su bolsa individual y límpiala con un paño suave y seco.';
 const img = (slug) => [`${slug}-1.jpg`];
 const imgs = (slug, n) => Array.from({ length: n }, (_, i) => `${slug}-${i + 1}.jpg`);

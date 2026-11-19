@@ -40,7 +40,7 @@ function ProductCard({ producto }) {
       </div>
       <div className="card__body">
         <h3 className="card__name"><Link to={url}>{producto.nombre}</Link></h3>
-        {total > 0 ? <Stars valor={promedio} total={total} size={13} /> : <span className="card__noreviews">Sin opiniones aún</span>}
+        {total > 0 && <Stars valor={promedio} total={total} size={13} />}
         <p className="card__price">{dinero(producto.precio)}</p>
         {agotado ? (
           <button className="btn btn--disabled btn--block btn--sm" disabled>Sin existencias</button>
