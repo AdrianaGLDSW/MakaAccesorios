@@ -78,7 +78,7 @@ Las rutas del repositorio anterior (`/productos`, `/product/:id`, `/cart`) redir
 
 Las opiniones marcadas como «Ejemplo» son textos de demostración y se pueden borrar en `VALORACIONES_EJEMPLO` (`src/data/productos.js`).
 
-## Tecnologías
+## Tecnologías usadas
 
 - React 18 y React Router 6 (rutas y carga diferida de páginas)
 - Vite 5
@@ -108,5 +108,5 @@ src/
 
 ## Publicar
 
-- **Netlify:** ejecuta `npm run build` y arrastra la carpeta `dist` a app.netlify.com/drop. El archivo `public/_redirects` ya está incluido.
-- **Vercel:** importa el repositorio; `vercel.json` ya incluye la regla para las rutas.
+- **Netlify:** ejecuta `npm run build` y se arrastra la carpeta `dist` a app.netlify.com/drop. El archivo `public/_redirects` ya está incluido.
+- **Vercel:** se importa el repositorio de GitHub; `vercel.json` ya incluye la regla para las rutas.
