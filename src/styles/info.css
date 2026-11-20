@@ -11,6 +11,7 @@
 .values article { border-top: 4px solid var(--rosa); }
 .values p { margin: 0; color: var(--texto-suave); font-size: .92rem; }
 .quality { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; background: var(--beige); border-radius: 18px; padding: 32px; }
+.quality__img img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radio); }
 .checklist { list-style: none; padding: 0; margin: 0; }
 .checklist li { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; }
 .checklist .icon { color: var(--exito); flex: none; margin-top: 3px; }
@@ -52,3 +53,6 @@
 .legal__toc { background: var(--beige-claro); border-radius: var(--radio-sm); padding: 12px 16px; font-size: .9rem; }
 .legal__toc ol { margin: 0; padding-left: 18px; columns: 2; }
 @media (max-width: 820px) { .legal { grid-template-columns: 1fr; } .legal__nav { position: static; flex-direction: row; overflow-x: auto; } .legal__nav a { white-space: nowrap; border-bottom: 0; border-right: 1px solid var(--linea); } .legal__toc ol { columns: 1; } .legal__doc { padding: 20px; } }
+
+.form-sub { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--cafe-oscuro); margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--linea); }
+.form-sub:first-of-type { margin-top: 8px; }

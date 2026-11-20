@@ -19,7 +19,7 @@ npm run preview    # prueba la versión de /dist
 
 | Elemento | Dónde está |
 |---|---|
-| Logo | Header y footer (`public/img/logo-maka.jpg`) |
+| Logo | Header y footer (`public/img/logo-maka.png`) |
 | Quiénes somos, misión, visión, valores y política de calidad | `/quienes-somos` |
 | Ubicación física | `/quienes-somos#ubicacion` (mapa embebido y puntos de entrega) |
 | Chat | Botón flotante en todas las páginas: respuestas rápidas y paso a WhatsApp |
@@ -27,9 +27,9 @@ npm run preview    # prueba la versión de /dist
 | Acceso a redes sociales | Footer y página de contacto |
 | Carrusel de imágenes propias | Página de inicio |
 | Valoración de productos | Detalle de cada producto: estrellas, promedio y formulario de opinión |
-| Tienda virtual con al menos 20 productos | `/catalogo`: 24 productos en 7 categorías |
+| Tienda virtual con al menos 20 productos | `/catalogo`: 45 productos en 7 categorías |
 | Formulario «Contáctanos» | `/contacto`, con validación |
-| Video embebido | Inicio y Quiénes somos (configurable, ver abajo) |
+| Facturación | `/facturacion`: solicitud de factura CFDI con validación de RFC |
 | Diseño responsivo | De 360 a 1920 px, con menú lateral en celular |
 
 ## Páginas (carta de navegación)
@@ -37,7 +37,7 @@ npm run preview    # prueba la versión de /dist
 | Página | Ruta |
 |---|---|
 | 1.0 Inicio | `/` |
-| 2.1 Productos por categoría | `/catalogo/:categoria` |
+| 2.1 Productos por categoría | `/catalogo/:categoria` (submenú «Catálogo») |
 | 2.2 Resultados de búsqueda | `/buscar?q=` |
 | 2.3 Detalle del producto | `/catalogo/:categoria/:producto` |
 | 3.0 Quiénes somos | `/quienes-somos` |
@@ -47,6 +47,7 @@ npm run preview    # prueba la versión de /dist
 | 6.0 Carrito | `/carrito` |
 | 6.1 Checkout en tres pasos | `/checkout` |
 | 6.2 Confirmación con tiempo límite de apartado | `/checkout/confirmacion/:pedido` |
+| 6.3 Facturación | `/facturacion` |
 | 7.0 Información legal | `/legal/aviso-de-privacidad`, `/legal/terminos`, `/legal/envios-y-devoluciones` |
 | Página no encontrada | cualquier otra ruta |
 
@@ -56,7 +57,7 @@ Las rutas del repositorio anterior (`/productos`, `/product/:id`, `/cart`) redir
 
 | Qué | Archivo |
 |---|---|
-| WhatsApp, correo, horario, redes, puntos de entrega, costos de envío, datos bancarios, cupones, video, logo | `src/data/config.js` |
+| WhatsApp, correo, horario, redes, puntos de entrega, costos de envío, datos bancarios, cupones, logo | `src/data/config.js` |
 | Productos, precios, existencias y fotos | `src/data/productos.js` |
 | Historia, misión, visión, valores, política de calidad, preguntas frecuentes, chat y textos legales | `src/data/contenido.js` |
 
@@ -64,7 +65,6 @@ Las rutas del repositorio anterior (`/productos`, `/product/:id`, `/cart`) redir
 - **Colecciones:** el arreglo `COLECCIONES` de `src/data/productos.js` agrupa piezas (por `id`) para la sección «Completa el set», las tarjetas de colecciones del inicio y el filtro `/catalogo?coleccion=...`.
 - **Carrusel:** las imágenes están en `public/img/carrusel/` (formato WebP). Los textos y enlaces de cada diapositiva están en `SLIDES`, dentro de `src/pages/Home.jsx`.
 - **Ícono y vista previa al compartir:** `public/favicon-64.png`, `public/apple-touch-icon.png` y `public/img/og-maka.jpg` (1200 × 630, la imagen que aparece al compartir el enlace por WhatsApp o redes). Las etiquetas están en `index.html`.
-- **Video:** sube el video a YouTube y pega su identificador en `VIDEO_YOUTUBE_ID`. Por ejemplo, en `https://www.youtube.com/watch?v=AbC123xyz` el identificador es `AbC123xyz`.
 - **Existencias:** el campo `stock` de cada producto. Un producto base con `stock: 0` se muestra como «Agotado»; uno de temporada (`temporada: true`) con `stock: 0` se oculta del catálogo.
 
 ## Datos de prueba
@@ -104,7 +104,7 @@ src/
 - Contraste AA: los textos y botones usan el café oscuro `#8b5a34` sobre fondos claros; el café de marca `#c18e61` se usa como acento.
 - Todos los campos tienen etiqueta visible. Los errores se muestran con ícono, texto y borde (no solo con color) y están asociados al campo.
 - Navegación con teclado, enlace «Saltar al contenido» y respeto a la preferencia de movimiento reducido.
-- Fotos optimizadas a 900 px con carga diferida. Las páginas secundarias se cargan bajo demanda y el video de YouTube solo se carga al pulsar «Reproducir».
+- Fotos optimizadas a 900 px con carga diferida. Las páginas secundarias se cargan bajo demanda. El catálogo usa miniaturas WebP.
 
 ## Publicar
 

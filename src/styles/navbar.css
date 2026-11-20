@@ -22,6 +22,19 @@
 .navbar__icon-only { display: none; }
 .badge { position: absolute; top: -5px; right: -7px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 99px; background: var(--cafe-oscuro); color: #fff; font-size: .7rem; font-weight: 700; display: grid; place-items: center; }
 
+/* Submenú de Catálogo */
+.navbar__drop { position: relative; }
+.navbar__drop-btn { display: flex; align-items: center; gap: 4px; background: none; border: 0; border-bottom: 2px solid transparent; padding: 6px 0; font: inherit; color: var(--texto); cursor: pointer; white-space: nowrap; }
+.navbar__drop-btn .icon { transition: transform .2s; }
+.navbar__drop.is-open .navbar__drop-btn .icon { transform: rotate(180deg); }
+.navbar__drop-btn:hover, .navbar__drop-btn.active { color: var(--cafe-oscuro); border-bottom-color: var(--cafe); }
+.navbar__sub { display: none; position: absolute; top: 100%; left: -18px; min-width: 230px; padding: 10px 0; margin-top: 4px; background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); box-shadow: 0 14px 34px rgba(60, 40, 25, .14); z-index: 60; }
+.navbar__sub::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+.navbar__drop.is-open .navbar__sub { display: flex; flex-direction: column; }
+.navbar__nav .navbar__sub a { padding: 9px 20px; border-bottom: 0; font-weight: 500; }
+.navbar__nav .navbar__sub a:hover { background: var(--beige-claro); }
+.navbar__nav .navbar__sub .navbar__sub-all { font-weight: 700; color: var(--cafe-oscuro); border-bottom: 1px solid var(--linea); margin-bottom: 4px; padding-bottom: 11px; }
+
 @media (max-width: 1380px) {
   .navbar__auth { display: none; }
   .navbar__icon-only { display: grid; }
@@ -35,6 +48,11 @@
   .navbar__nav.is-open { transform: none; }
   .navbar__nav a { padding: 14px 22px; border-bottom: 1px solid var(--linea); font-size: 1rem; }
   .navbar__nav a:hover, .navbar__nav a.active { border-bottom-color: var(--linea); background: var(--beige-claro); }
+  .navbar__drop-btn { width: 100%; justify-content: space-between; padding: 14px 22px; border-bottom: 1px solid var(--linea); font-size: 1rem; font-weight: 500; }
+  .navbar__drop-btn:hover, .navbar__drop-btn.active { border-bottom-color: var(--linea); background: var(--beige-claro); }
+  .navbar__sub { position: static; margin: 0; padding: 4px 0; border: 0; border-radius: 0; box-shadow: none; background: var(--beige-claro); min-width: 0; }
+  .navbar__nav .navbar__sub a { padding: 11px 22px 11px 38px; border-bottom: 0; font-size: .95rem; }
+  .navbar__nav .navbar__sub .navbar__sub-all { margin-bottom: 0; padding-bottom: 11px; }
   .navbar__nav-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 14px 22px; font-weight: 700; background: var(--beige); }
   .navbar__nav-head button { background: none; border: 0; padding: 6px; }
   .navbar__nav-extra { display: flex; flex-direction: column; margin-top: 12px; }

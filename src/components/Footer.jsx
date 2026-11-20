@@ -43,6 +43,7 @@ export default function Footer() {
             <li><Link to="/cuenta/iniciar-sesion">Iniciar sesión</Link></li>
             <li><Link to="/cuenta/registro">Registro</Link></li>
             <li><Link to="/cuenta?tab=pedidos">Historial de pedidos</Link></li>
+            <li><Link to="/facturacion">Facturación</Link></li>
           </ul>
         </nav>
         <nav aria-label="Legal">

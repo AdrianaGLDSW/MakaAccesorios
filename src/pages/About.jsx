@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { NOSOTROS } from '../data/contenido';
 import { PUNTOS_ENTREGA, TIENDA } from '../data/config';
 import { useTitulo } from '../hooks/useLocalStorage';
-import { VideoMarca, Mapa } from '../components/Media';
+import { Mapa } from '../components/Media';
 import { Breadcrumbs } from '../components/ui';
 import Icon from '../components/Icon';
 import '../styles/info.css';
 
+// 3.0 Quiénes somos: historia, misión, visión, valores, política de calidad y ubicación física.
 export default function About() {
   useTitulo('Quiénes somos');
   return (
@@ -43,7 +44,7 @@ export default function About() {
             <p>En MAKA nos comprometemos a que cada pieza llegue tal como la viste:</p>
             <ul className="checklist">{NOSOTROS.politicaCalidad.map(t => <li key={t}><Icon name="check" size={18} /> {t}</li>)}</ul>
           </div>
-          <div className="quality__video"><VideoMarca /></div>
+          <div className="quality__img"><img src="/img/productos/aretes-cascada-hojas-1.jpg" alt="Aretes dorados Cascada de Hojas revisados antes de su entrega" loading="lazy" /></div>
         </section>
 
         <section id="ubicacion" className="section location" aria-labelledby="t-ubicacion">

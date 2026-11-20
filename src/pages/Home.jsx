@@ -7,7 +7,6 @@ import { dinero } from '../utils/format';
 import Carousel from '../components/Carousel';
 import ProductCard from '../components/ProductCard';
 import ProductImage, { rutaFoto } from '../components/ProductImage';
-import { VideoMarca } from '../components/Media';
 import Icon from '../components/Icon';
 import '../styles/home.css';
 
@@ -92,7 +91,10 @@ export default function Home() {
       </section>
 
       <section className="container section about-teaser" aria-labelledby="t-nosotros">
-        <div className="about-teaser__video"><VideoMarca /></div>
+        <div className="about-teaser__img">
+          <img src="/img/productos/collar-perlas-flotantes-1.jpg" alt="Collar de perlas flotantes de MAKA" loading="lazy" />
+          <img src="/img/productos/anillo-espiral-perla-2.jpg" alt="Anillo espiral con perla de MAKA" loading="lazy" />
+        </div>
         <div className="about-teaser__text">
           <span className="kicker">Quiénes somos</span>
           <h2 id="t-nosotros">Hecho con cariño en Jalisco</h2>

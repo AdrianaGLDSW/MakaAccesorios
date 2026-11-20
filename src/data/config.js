@@ -1,6 +1,6 @@
 // =============================================================
 //  Configuración general de la tienda.
-//  Cambia aquí los datos de contacto, redes, video y pagos.
+//  Cambia aquí los datos de contacto, redes y pagos.
 // =============================================================
 
 export const TIENDA = {
@@ -21,10 +21,6 @@ export const REDES = [
   { id: 'facebook', nombre: 'Facebook', url: 'https://www.facebook.com/' },
   { id: 'whatsapp', nombre: 'WhatsApp', url: `https://wa.me/${TIENDA.whatsapp}` },
 ];
-
-// Video de presentación (YouTube). Pega solo el identificador del video:
-// en https://www.youtube.com/watch?v=AbC123xyz el identificador es AbC123xyz.
-export const VIDEO_YOUTUBE_ID = '';
 
 // Mapa embebido de la zona de operación (no requiere clave de API).
 export const MAPA_URL = 'https://www.google.com/maps?q=Guadalajara%2C%20Jalisco&z=12&output=embed';

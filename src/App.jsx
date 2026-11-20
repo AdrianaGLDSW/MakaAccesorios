@@ -11,6 +11,7 @@ import ChatWidget from './components/ChatWidget';
 import Toast from './components/Toast';
 import Home from './pages/Home';
 
+// Las páginas secundarias se cargan bajo demanda para que el inicio cargue más rápido (RNF-02).
 const Productos = lazy(() => import('./pages/Productos'));
 const ProductDetail = lazy(() => import('./pages/ProductDetail'));
 const About = lazy(() => import('./pages/About'));
@@ -23,6 +24,7 @@ const Login = lazy(() => import('./pages/Login'));
 const Recover = lazy(() => import('./pages/Recover'));
 const Account = lazy(() => import('./pages/Account'));
 const Favorites = lazy(() => import('./pages/Favorites'));
+const Facturacion = lazy(() => import('./pages/Facturacion'));
 const Legal = lazy(() => import('./pages/Legal'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -35,6 +37,7 @@ function ScrollToTop() {
   return null;
 }
 
+// Rutas del repositorio original que se conservan por compatibilidad.
 function ProductoLegacy() {
   const p = productoPorId(useParams().id);
   return <Navigate to={p ? urlProducto(p) : '/catalogo'} replace />;
@@ -67,6 +70,7 @@ export default function App() {
                     <Route path="/cuenta/iniciar-sesion" element={<Login />} />
                     <Route path="/cuenta/recuperar" element={<Recover />} />
                     <Route path="/favoritos" element={<Favorites />} />
+                    <Route path="/facturacion" element={<Facturacion />} />
                     <Route path="/legal/:seccion" element={<Legal />} />
                     {/* Compatibilidad con las rutas anteriores */}
                     <Route path="/productos" element={<Navigate to="/catalogo" replace />} />

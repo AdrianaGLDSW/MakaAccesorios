@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { CATEGORIAS } from '../data/productos';
 import { ENVIO } from '../data/config';
@@ -13,17 +13,29 @@ export default function Navbar() {
   const { piezas } = useCart();
   const { usuario, favoritos } = useAuth();
   const [abierto, setAbierto] = useState(false);
+  const [catAbierto, setCatAbierto] = useState(false);
+  const dropRef = useRef(null);
   const [params] = useSearchParams();
   const [q, setQ] = useState(params.get('q') || '');
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  useEffect(() => { setAbierto(false); }, [pathname]);
+  useEffect(() => { setAbierto(false); setCatAbierto(false); }, [pathname, params]);
+
+  // El submenú de Catálogo se cierra al hacer clic fuera o al pulsar Esc.
+  useEffect(() => {
+    if (!catAbierto) return;
+    const fuera = (e) => { if (!dropRef.current?.contains(e.target)) setCatAbierto(false); };
+    const esc = (e) => { if (e.key === 'Escape') setCatAbierto(false); };
+    document.addEventListener('mousedown', fuera); document.addEventListener('keydown', esc);
+    return () => { document.removeEventListener('mousedown', fuera); document.removeEventListener('keydown', esc); };
+  }, [catAbierto]);
+  const enCatalogo = pathname.startsWith('/catalogo') || pathname === '/buscar';
   useEffect(() => { document.body.style.overflow = abierto ? 'hidden' : ''; }, [abierto]);
 
   const buscar = (e) => {
     e.preventDefault();
-    if (!q.trim()) return; 
+    if (!q.trim()) return; // CU-03 2a: búsqueda vacía no se ejecuta
     navigate(`/buscar?q=${encodeURIComponent(q.trim())}`);
   };
 
@@ -42,10 +54,22 @@ export default function Navbar() {
             <span>Menú</span>
             <button onClick={() => setAbierto(false)} aria-label="Cerrar menú"><Icon name="close" size={24} /></button>
           </div>
-          <Link to="/catalogo?orden=novedades">Novedades</Link>
-          {CATEGORIAS.map(c => <NavLink key={c.slug} to={`/catalogo/${c.slug}`}>{c.nombre}</NavLink>)}
+          <NavLink to="/" end>Inicio</NavLink>
+          <div className={`navbar__drop ${catAbierto ? 'is-open' : ''}`} ref={dropRef}
+            onMouseEnter={() => window.matchMedia('(hover: hover) and (min-width: 1181px)').matches && setCatAbierto(true)}
+            onMouseLeave={() => window.matchMedia('(hover: hover) and (min-width: 1181px)').matches && setCatAbierto(false)}>
+            <button type="button" className={`navbar__drop-btn ${enCatalogo ? 'active' : ''}`} aria-expanded={catAbierto} aria-controls="submenu-catalogo" onClick={() => setCatAbierto(v => !v)}>
+              Catálogo <Icon name="chevronDown" size={15} />
+            </button>
+            <div id="submenu-catalogo" className="navbar__sub">
+              <Link to="/catalogo" className="navbar__sub-all">Ver todo el catálogo</Link>
+              <Link to="/catalogo?orden=novedades">Novedades</Link>
+              {CATEGORIAS.map(c => <Link key={c.slug} to={`/catalogo/${c.slug}`}>{c.nombre}</Link>)}
+            </div>
+          </div>
+          <NavLink to="/quienes-somos">Nosotros</NavLink>
+          <NavLink to="/facturacion">Facturación</NavLink>
           <div className="navbar__nav-extra">
-            <NavLink to="/quienes-somos">Quiénes somos</NavLink>
             <NavLink to="/contacto">Contacto y preguntas frecuentes</NavLink>
             <NavLink to={usuario ? '/cuenta' : '/cuenta/iniciar-sesion'}>{usuario ? 'Mi cuenta' : 'Iniciar sesión'}</NavLink>
           </div>
